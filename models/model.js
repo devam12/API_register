@@ -8,9 +8,10 @@ const registerSchema = new mongoose.Schema({
     },
     phoneno: {
         type: Number,
+        require : true
     },
     status:{
-        type:Boolean,
+        type:String,
     }
 })
 

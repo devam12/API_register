@@ -16,9 +16,7 @@ router.post('/register', async (req, res) => {
             name: req.body.name,
             email: req.body.email,
             phoneno: req.body.phoneno,
-            status: 0
-            //Status pending - false
-            //approved - true
+            status: "Pending"
         })
         try {
             const dataToSave = await data.save();
@@ -36,14 +34,17 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     try{
-        console.log(req.body.email);
-        var query = {email: req.body.email};
+        console.log(req.body.phoneno);
+        var query = {phoneno: req.body.phoneno};
         const findObj  = await registerObj.findOne(query);
-        if(findObj.status==true){
-            res.send("You have approved by Admin please check your rates ");
+        if(findObj.status=="Approved"){
+            res.send("You have Approved by Admin please check your rates ");
+        }
+        else if(findObj.status=="Pending"){
+            res.send("You may still be waiting for approval on the administration side, Your status is 'pending'");
         }
         else{
-            res.send("You have not approved by admin please wait");
+            res.send("Your profile Unapproved by the administration side");
         }
     }
     catch(error){
