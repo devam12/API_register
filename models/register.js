@@ -6,13 +6,13 @@ const registerSchema = new mongoose.Schema({
     email: {
         type: String,
     },
-    phoneno: {
-        type: Number,
-        require : true
-    },
     status:{
-        type:String,
+        type: Boolean,
+    },
+    user:{
+        type: Array,
     }
 })
+
 
 module.exports = mongoose.model('Register', registerSchema)
